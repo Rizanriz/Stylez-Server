@@ -17,18 +17,12 @@ const productSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    category:{
-        type:String,
-        required:true
-    },
+
     image:{
         type:String,
         required:true
     },
-    rating:{
-        type:Object,
-        required:true
-    },
+
 })
 
 const products = mongoose.model("products",productSchema)

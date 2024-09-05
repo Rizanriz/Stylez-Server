@@ -1,5 +1,5 @@
     const express = require("express")
-    const { getAllProducts, viewProduct } = require("../controllers/productController")
+    const { getAllProducts, viewProduct, deleteProduct, addProduct } = require("../controllers/productController")
     const { register, login } = require("../controllers/userController")
     const { addToWishlist, getWishlist, removeWishlist } = require("../controllers/wishlistController")
     const { addToCart,getCart, removeCartItems,incrementCart,decrementCart, emptyCart } = require("../controllers/cartController")
@@ -9,7 +9,11 @@
 
     router.get('/all-products',getAllProducts)
 
+    router.post('/newproduct',addProduct)
+
     router.get('/:id/view-product',viewProduct)
+
+    router.delete('/:id/delete',deleteProduct)
 
     router.post('/register',register)
 
