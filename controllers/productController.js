@@ -54,12 +54,14 @@ exports.viewProduct = async (req,res)=>{
         res.status(401).json(error)
     }
 }
+
+//delete product
 exports.deleteProduct = async (req, res) => {
     console.log("Inside deleteProductController");
     const { id } = req.params;
 
     try {
-        const deletedProduct = await products.findByIdAndDelete(id); 
+        const deletedProduct = await products.findOneAndDelete({id}); 
         if (!deletedProduct) {
             return res.status(404).json({ message: "Product not found" });
         }
@@ -68,3 +70,26 @@ exports.deleteProduct = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+//update prooduct
+exports.updateProduct = async (req,res) =>{
+    console.log("InsideUpdateController");
+    const {id} = req.params
+    const {title,price,description,image} = req.body
+
+    try {
+        const updateProduct = await products.findOneAndUpdate({id},
+            {title,price,description,image},
+            {new:true}
+        )
+        if (!updateProduct) {
+            res.status(404).json({message: "Product not found"})
+        }
+        res.status(200).json({ message: "Product Updated", updateProduct });
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+
+}
+
+
