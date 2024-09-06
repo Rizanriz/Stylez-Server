@@ -1,5 +1,5 @@
     const express = require("express")
-    const { getAllProducts, viewProduct, deleteProduct, addProduct, updateProduct } = require("../controllers/productController")
+    const { getAllProducts, viewProduct, deleteProduct, addProduct, updateProduct, getProductById } = require("../controllers/productController")
     const { register, login } = require("../controllers/userController")
     const { addToWishlist, getWishlist, removeWishlist } = require("../controllers/wishlistController")
     const { addToCart,getCart, removeCartItems,incrementCart,decrementCart, emptyCart } = require("../controllers/cartController")
@@ -8,6 +8,8 @@
     const router = new express.Router()
 
     router.get('/all-products',getAllProducts)
+
+    router.get('/:id/viewproduct', getProductById);
 
     router.post('/newproduct',addProduct)
 

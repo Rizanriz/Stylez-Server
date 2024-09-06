@@ -92,4 +92,22 @@ exports.updateProduct = async (req,res) =>{
 
 }
 
+// Get a single product by ID
+exports.getProductById = async (req, res) => {
+    console.log("Inside getProductByIdController");
+    const { id } = req.params;
+
+    try {
+        // Ensure `id` is treated as a number if your schema uses numbers
+        const singleProduct = await products.findOne({ id: Number(id) });
+
+        if (!singleProduct) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        res.status(200).json(singleProduct);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
